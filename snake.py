@@ -9,6 +9,7 @@ class SnakeGame:
         self.done = False
         self.board = {'width': board_width, 'height': board_height}
         self.gui = gui
+        self.manual = False
 
     def start(self):
         self.snake_init()
@@ -32,8 +33,8 @@ class SnakeGame:
             self.snake.insert(0, point)
 
         # Set direction so that snake cannot go left while looking right at start
-        if self.vertical: self.prev_key = game.DIRECTION_DOWN
-        else: self.prev_key = game.DIRECTION_RIGHT
+        if self.vertical: self.prev_key = self.DIRECTION_DOWN
+        else: self.prev_key = self.DIRECTION_RIGHT
 
     def generate_food(self):
         food = []
@@ -61,7 +62,7 @@ class SnakeGame:
                 self.win.addch(point[0], point[1], 'O')
             else:
                 self.win.addch(point[0], point[1], 'o')
-        if not manual: self.win.getch()
+        if not self.manual: self.win.getch()
 
     def step(self, key):
         if self.done == True: self.end_game()
@@ -114,20 +115,20 @@ class SnakeGame:
 
     def end_game(self):
         if self.gui: self.render_destroy()
-        if manual: print("Game over. Score: " + str(self.score) + ", args: " + str(args))
+        if self.manual: print("Game over. Score: " + str(self.score) + ", args: " + str(args))
         else: raise Exception("Game over")
 
 if __name__ == "__main__":
     game = SnakeGame(gui=True)
     # Read the args to know if the user wants to play manually or not
     args = sys.argv[1:]
-    manual, steps = False, 20
+    game.manual, steps = False, 20
     if not args: pass
-    elif args[0] == '-manual' or args[0] == '-m': manual = True
+    elif args[0] == '-manual' or args[0] == '-m': game.manual = True
     elif args[0] == '-steps' or args[0] == '-t': steps = int(args[1])
 
     game.start()
-    if manual:
+    if game.manual:
         # Need to turn the keypad on in order to be able to read the arrow keys
         game.win.keypad(True)
         key = -1
