@@ -34,14 +34,14 @@ class SnakeNN:
                 action, game_action = self.generate_action(snake)
                 done, score, snake, food  = game.step(game_action)
                 if done:
-                    training_data.append([self.add_action_to_observation(prev_observation, action), -1])
+                    training_data.append([self.add_action_to_observation(prev_observation, action), -1]) # Snake is dead
                     break
                 else:
                     food_distance = self.get_food_distance(snake, food)
                     if score > prev_score or food_distance < prev_food_distance:
-                        training_data.append([self.add_action_to_observation(prev_observation, action), 1])
+                        training_data.append([self.add_action_to_observation(prev_observation, action), 1]) # The last move was efficient
                     else:
-                        training_data.append([self.add_action_to_observation(prev_observation, action), 0])
+                        training_data.append([self.add_action_to_observation(prev_observation, action), 0]) # The last move was not efficient
                     prev_observation = self.generate_observation(snake, food)
                     prev_food_distance = food_distance
         return training_data
@@ -88,7 +88,7 @@ class SnakeNN:
 
     def is_direction_blocked(self, snake, direction):
         point = np.array(snake[0]) + np.array(direction)
-        return point.tolist() in snake[:-1] or point[0] == 0 or point[1] == 0 or point[0] == 21 or point[1] == 21
+        return point.tolist() in snake[:-1] or point[0] == 0 or point[1] == 0 or point[0] == 21 or point[1] == 21 # This is the board limit
 
     def turn_vector_to_the_left(self, vector):
         return np.array([-vector[1], vector[0]])
@@ -97,20 +97,21 @@ class SnakeNN:
         return np.array([vector[1], -vector[0]])
 
     def get_angle(self, a, b):
+        # We should first normalize vectors, so that the angle is a value between -1 and 1
         a = self.normalize_vector(a)
         b = self.normalize_vector(b)
         return math.atan2(a[0] * b[1] - a[1] * b[0], a[0] * b[0] + a[1] * b[1]) / math.pi
 
     def model(self):
         network = input_data(shape=[None, 5, 1], name='input')
-        network = fully_connected(network, 25, activation='relu')
+        network = fully_connected(network, 25, activation='relu') # 25 hidden layers, Rectified Linear Unit [f(x) = max(0, x)]
         network = fully_connected(network, 1, activation='linear')
         network = regression(network, optimizer='adam', learning_rate=self.lr, loss='mean_square', name='target')
         model = tflearn.DNN(network, tensorboard_dir='log')
         return model
 
     def train_model(self, training_data, model):
-        X = np.array([i[0] for i in training_data]).reshape(-1, 5, 1)
+        X = np.array([i[0] for i in training_data]).reshape(-1, 5, 1) # Reshape the array so that it is not continuous array anymore, but an array of lists of size 5
         y = np.array([i[1] for i in training_data]).reshape(-1, 1)
         model.fit(X,y, n_epoch = 3, shuffle = True, run_id = self.filename)
         model.save(self.filename)
@@ -136,8 +137,8 @@ class SnakeNN:
                 if done:
                     print('-----')
                     print(steps)
-                    print(snake)
-                    print(food)
+                    #print(snake)
+                    #print(food)
                     print(prev_observation)
                     print(predictions)
                     break
@@ -147,19 +148,19 @@ class SnakeNN:
             steps_arr.append(steps)
             scores_arr.append(score)
         print('Average steps:',mean(steps_arr))
-        print(Counter(steps_arr))
+        #print(Counter(steps_arr))
         print('Average score:',mean(scores_arr))
-        print(Counter(scores_arr))
+        #print(Counter(scores_arr))
 
     def visualise_game(self, model):
         game = SnakeGame(gui = True)
         _, _, snake, food = game.start()
         prev_observation = self.generate_observation(snake, food)
         for _ in range(self.goal_steps):
-            precictions = []
+            predictions = []
             for action in range(-1, 2):
-               precictions.append(model.predict(self.add_action_to_observation(prev_observation, action).reshape(-1, 5, 1)))
-            action = np.argmax(np.array(precictions))
+               predictions.append(model.predict(self.add_action_to_observation(prev_observation, action).reshape(-1, 5, 1)))
+            action = np.argmax(np.array(predictions))
             game_action = self.get_game_action(snake, action - 1)
             done, _, snake, food  = game.step(game_action)
             if done:
