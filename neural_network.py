@@ -1,8 +1,10 @@
 from snake import SnakeGame
+from maze import MazeGame
 from random import randint
 import numpy as np
 import tflearn
 import math
+import sys
 from tflearn.layers.core import input_data, fully_connected
 from tflearn.layers.estimator import regression
 from statistics import mean
@@ -10,7 +12,7 @@ from collections import Counter
 from tensorflow.python.framework import ops #This is to fix the visualize issue
 
 class SnakeNN:
-    def __init__(self, initial_games = 10000, test_games = 1000, goal_steps = 2000, lr = 1e-2, filename = 'snake_nn.tflearn'):
+    def __init__(self, initial_games = 100000, test_games = 1000, goal_steps = 2000, lr = 1e-2, filename = 'snake_nn.tflearn'):
         self.initial_games = initial_games
         self.test_games = test_games
         self.goal_steps = goal_steps
@@ -135,12 +137,12 @@ class SnakeNN:
                 done, score, snake, food  = game.step(game_action)
                 game_memory.append([prev_observation, action])
                 if done:
-                    print('-----')
-                    print(steps)
+                    #print('-----')
+                    #print(steps)
                     #print(snake)
                     #print(food)
-                    print(prev_observation)
-                    print(predictions)
+                    #print(prev_observation)
+                    #print(predictions)
                     break
                 else:
                     prev_observation = self.generate_observation(snake, food)
@@ -152,8 +154,11 @@ class SnakeNN:
         print('Average score:',mean(scores_arr))
         #print(Counter(scores_arr))
 
-    def visualise_game(self, model):
-        game = SnakeGame(gui = True)
+    def visualise_game(self, model, game_var):
+        if game_var == 'snake':
+            game = SnakeGame(gui = True)
+        if game_var == 'maze':
+            game = MazeGame(gui = True)
         _, _, snake, food = game.start()
         prev_observation = self.generate_observation(snake, food)
         for _ in range(self.goal_steps):
@@ -174,11 +179,11 @@ class SnakeNN:
         nn_model = self.train_model(training_data, nn_model)
         self.test_model(nn_model)
 
-    def visualise(self):
+    def visualise(self, game_var):
         ops.reset_default_graph()
         nn_model = self.model()
         nn_model.load(self.filename)
-        self.visualise_game(nn_model)
+        self.visualise_game(nn_model, game_var)
 
     def test(self):
         nn_model = self.model()
@@ -186,4 +191,13 @@ class SnakeNN:
         self.test_model(nn_model)
 
 if __name__ == "__main__":
-    SnakeNN().train()
+    args = sys.argv[1:]
+    #args=['-v', 'maze']
+    #args=['-v']
+    if not args: SnakeNN().train()
+    elif args[0] == '-visualize' or args[0] == '-v':
+        if len(args) == 1: args += ['snake']
+        if args[1] == 'maze':
+            SnakeNN().visualise('maze')
+        else:
+            SnakeNN().visualise('snake')

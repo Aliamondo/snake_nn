@@ -4,7 +4,7 @@ from random import randint
 # TODO: Apple can be generated on the snake
 
 class SnakeGame:
-    def __init__(self, board_width=20, board_height=20, gui=False):
+    def __init__(self, board_width=20, board_height=30, gui=False):
         self.score = 0
         self.done = False
         self.board = {'width': board_width, 'height': board_height}
