@@ -14,6 +14,7 @@ from tensorflow.python.framework import ops #This is to fix the visualize issue
 class SnakeNN:
     def __init__(self, initial_games = 100000, test_games = 1000, goal_steps = 2000, lr = 1e-2, filename = 'snake_nn.tflearn'):
         self.initial_games = initial_games
+        print(self.initial_games)
         self.test_games = test_games
         self.goal_steps = goal_steps
         self.lr = lr
@@ -201,3 +202,7 @@ if __name__ == "__main__":
             SnakeNN().visualise('maze')
         else:
             SnakeNN().visualise('snake')
+    elif args[0] == '-train' or args[0] == '-t':
+        if len(args) > 1:
+            training_num = int(args[1])
+            SnakeNN(initial_games = training_num).train()
