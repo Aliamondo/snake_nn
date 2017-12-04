@@ -216,6 +216,7 @@ if __name__ == "__main__":
     elif args[0] == '-train' or args[0] == '-t':
         if len(args) >= 2:
             training_num = int(args[1])
+            test_num = 1000
             if len(args) >= 3:
                 test_num = int(args[2])
             SnakeNN(initial_games = training_num, test_games = test_num).train()
