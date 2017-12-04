@@ -1,5 +1,6 @@
 import curses, sys
 from random import randint, shuffle
+from collections import defaultdict as ddict
 
 class MazeGame:
     def __init__(self, board_width=20, board_height=20, gui=False):
@@ -8,6 +9,7 @@ class MazeGame:
         self.board = {'width': board_width, 'height': board_height}
         self.gui = gui
         self.manual = False
+        self.move_history = ddict(int)
 
     def start(self):
         self.game_init()
@@ -26,6 +28,7 @@ class MazeGame:
         #y = randint(5, self.board["height"] - 5)
         self.player = [[self.board["width"], 1], [self.board["width"], 0]] # We also need the previous player location for the direction vector
         self.exit   = [1, self.board["height"]]
+        self.move_history[str(self.player[0])] += 1
         
         self.prev_key = self.DIRECTION_RIGHT
 
@@ -37,7 +40,7 @@ class MazeGame:
                 temp_obstacle = [randint(1, self.board["width"]), randint(1, self.board["height"])]
                 if temp_obstacle in self.player or temp_obstacle == self.exit: temp_obstacle = []
             self.player.append(temp_obstacle)"""
-        # Algorithm taken from http://amertune.blogspot.co.ke/2008/12/maze-generation-in-python.html
+        # Algorithm taken from http://amertune.blogspot.com/2008/12/maze-generation-in-python.html
         width, height = self.board["height"], self.board["width"]
         # create a list of all walls
         # (all connections between squares in the maze)
@@ -113,7 +116,7 @@ class MazeGame:
     def render(self):
         self.win.clear()
         self.win.border(0)
-        self.win.addstr(0, 2, 'Maze ')
+        self.win.addstr(0, 2, 'Maze. Score: ' + str(self.score) + ' ')
         self.win.addch(self.exit[0], self.exit[1], 'x')
         for i, point in enumerate(self.player):
             if i == 0:
@@ -126,7 +129,10 @@ class MazeGame:
         if self.done == True: self.end_game()
         
         self.move(key)
-        self.score += 1 # Increase the score by one after every move we survived
+        if self.move_history[str(self.player[0])] < 4:
+            self.score += 1 # Increase the score by one after every move we survived
+        else:
+            self.score -= 1 # Decrease the score if NN is stuck in an infinite loop
         if self.exit_reached():
             print("Game won!")
             self.done = True
@@ -145,6 +151,7 @@ class MazeGame:
             self.player[0][0] += 1
         elif key == self.DIRECTION_LEFT:
             self.player[0][1] -= 1
+        self.move_history[str(self.player[0])] += 1
 
     def exit_reached(self):
         return self.player[0] == self.exit

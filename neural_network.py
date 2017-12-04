@@ -5,6 +5,7 @@ import numpy as np
 import tflearn
 import math
 import sys
+import os
 from tflearn.layers.core import input_data, fully_connected
 from tflearn.layers.estimator import regression
 from statistics import mean
@@ -12,10 +13,11 @@ from collections import Counter
 from tensorflow.python.framework import ops #This is to fix the visualize issue
 
 class SnakeNN:
-    def __init__(self, initial_games = 100000, test_games = 1000, goal_steps = 2000, lr = 1e-2, filename = 'snake_nn.tflearn'):
+    def __init__(self, initial_games = 10000, test_games = 1000, goal_steps = 2000, lr = 1e-2, filename = 'snake_nn.tflearn'):
         self.initial_games = initial_games
-        print(self.initial_games)
+        print("Initial games number: " + str(self.initial_games))
         self.test_games = test_games
+        print("Test games number:    " + str(self.test_games))
         self.goal_steps = goal_steps
         self.lr = lr
         self.filename = filename
@@ -116,6 +118,11 @@ class SnakeNN:
     def train_model(self, training_data, model):
         X = np.array([i[0] for i in training_data]).reshape(-1, 5, 1) # Reshape the array so that it is not continuous array anymore, but an array of lists of size 5
         y = np.array([i[1] for i in training_data]).reshape(-1, 1)
+        if os.path.isfile(self.filename + ".meta") and os.path.isfile(self.filename + ".index"):
+            print("Model file was found")
+            model.load(self.filename)
+        else:
+            print("There was an issue reading the model file, new one will be created")
         model.fit(X,y, n_epoch = 3, shuffle = True, run_id = self.filename)
         model.save(self.filename)
         return model
@@ -123,6 +130,7 @@ class SnakeNN:
     def test_model(self, model):
         steps_arr = []
         scores_arr = []
+        count = 0
         for _ in range(self.test_games):
             steps = 0
             game_memory = []
@@ -138,12 +146,15 @@ class SnakeNN:
                 done, score, snake, food  = game.step(game_action)
                 game_memory.append([prev_observation, action])
                 if done:
-                    #print('-----')
-                    #print(steps)
-                    #print(snake)
-                    #print(food)
-                    #print(prev_observation)
-                    #print(predictions)
+                    count += 1
+                    if count % 100:
+                        print('-----')
+                        print('id: ' + str(count))
+                        print(steps)
+                        print(snake)
+                        print(food)
+                        print(prev_observation)
+                        print(predictions)
                     break
                 else:
                     prev_observation = self.generate_observation(snake, food)
@@ -203,6 +214,8 @@ if __name__ == "__main__":
         else:
             SnakeNN().visualise('snake')
     elif args[0] == '-train' or args[0] == '-t':
-        if len(args) > 1:
+        if len(args) >= 2:
             training_num = int(args[1])
-            SnakeNN(initial_games = training_num).train()
+            if len(args) >= 3:
+                test_num = int(args[2])
+            SnakeNN(initial_games = training_num, test_games = test_num).train()
