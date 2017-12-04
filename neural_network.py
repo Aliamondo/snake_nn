@@ -147,7 +147,7 @@ class SnakeNN:
                 game_memory.append([prev_observation, action])
                 if done:
                     count += 1
-                    if count % 100:
+                    if count % 100 == 0:
                         print('-----')
                         print('id: ' + str(count))
                         print(steps)
