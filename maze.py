@@ -136,7 +136,7 @@ class MazeGame:
         if self.move_history[str(self.player[0])] < 4:
             #self.score += 1 # Increase the score by one after every move we survived
             pass
-        else if self.move_history[str(self.player[0])] < 8:
+        elif self.move_history[str(self.player[0])] < 8:
             self.score -= 1 # Decrease the score if NN is stuck in an infinite loop
         else:
             self.done = True # Stop the game to avoid the infinite loop
