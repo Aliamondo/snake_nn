@@ -109,7 +109,7 @@ class SnakeNN:
         return np.array([vector[1], -vector[0]])
 
     def reflect_vector(self, vector):
-        print("Reflected the vector (turned around)")
+        #print("Reflected the vector (turned around)")
         return np.array([-vector[0], -vector[1]])
 
     def get_angle(self, a, b):
