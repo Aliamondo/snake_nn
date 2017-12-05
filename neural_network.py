@@ -13,7 +13,7 @@ from collections import Counter
 from tensorflow.python.framework import ops #This is to fix the visualize issue
 
 class SnakeNN:
-    def __init__(self, initial_games = 10000, test_games = 1000, goal_steps = 2000, lr = 1e-2, filename = 'snake_nn.tflearn'):
+    def __init__(self, initial_games = 10000, test_games = 1000, goal_steps = 2000, lr = 1e-2, filename = 'snake_nn.tflearn', game_type = 'snake'):
         self.initial_games = initial_games
         print("Initial games number: " + str(self.initial_games))
         self.test_games = test_games
@@ -21,6 +21,7 @@ class SnakeNN:
         self.goal_steps = goal_steps
         self.lr = lr
         self.filename = filename
+        self.game_type = game_type
         self.vectors_and_keys = [
                 [[-1, 0], 0], # UP
                 [[0, 1], 1],  # RIGHT
@@ -32,6 +33,8 @@ class SnakeNN:
         training_data = []
         for _ in range(self.initial_games):
             game = SnakeGame()
+            if self.game_type == 'maze':
+                game = MazeGame()
             _, prev_score, snake, food = game.start()
             prev_observation = self.generate_observation(snake, food)
             prev_food_distance = self.get_food_distance(snake, food)
@@ -53,6 +56,8 @@ class SnakeNN:
 
     def generate_action(self, snake):
         action = randint(0,2) - 1
+        if self.game_type == 'maze':
+            action = randint(0,3) - 1
         return action, self.get_game_action(snake, action)
 
     def get_game_action(self, snake, action):
@@ -62,6 +67,8 @@ class SnakeNN:
             new_direction = self.turn_vector_to_the_left(snake_direction)
         elif action == 1:
             new_direction = self.turn_vector_to_the_right(snake_direction)
+        elif action == 2: # Turn back in a maze game
+            new_direction = self.reflect_vector(snake_direction)
         for pair in self.vectors_and_keys:
             if pair[0] == new_direction.tolist():
                 game_action = pair[1]
@@ -101,6 +108,9 @@ class SnakeNN:
     def turn_vector_to_the_right(self, vector):
         return np.array([vector[1], -vector[0]])
 
+    def reflect_vector(self, vector):
+        return np.array([-vector[0], -vector[1]])
+
     def get_angle(self, a, b):
         # We should first normalize vectors, so that the angle is a value between -1 and 1
         a = self.normalize_vector(a)
@@ -135,6 +145,8 @@ class SnakeNN:
             steps = 0
             game_memory = []
             game = SnakeGame()
+            if self.game_type == 'maze':
+                game = MazeGame()
             _, score, snake, food = game.start()
             prev_observation = self.generate_observation(snake, food)
             for _ in range(self.goal_steps):
@@ -166,10 +178,9 @@ class SnakeNN:
         print('Average score:',mean(scores_arr))
         #print(Counter(scores_arr))
 
-    def visualise_game(self, model, game_var):
-        if game_var == 'snake':
-            game = SnakeGame(gui = True)
-        if game_var == 'maze':
+    def visualise_game(self, model, game_type):
+        game = SnakeGame(gui = True)
+        if game_type == 'maze':
             game = MazeGame(gui = True)
         _, _, snake, food = game.start()
         prev_observation = self.generate_observation(snake, food)
@@ -214,9 +225,13 @@ if __name__ == "__main__":
         else:
             SnakeNN().visualise('snake')
     elif args[0] == '-train' or args[0] == '-t':
+        game_type = 'snake'
         if len(args) >= 2:
-            training_num = int(args[1])
-            test_num = 1000
-            if len(args) >= 3:
-                test_num = int(args[2])
-            SnakeNN(initial_games = training_num, test_games = test_num).train()
+            if args[1] == 'maze':
+                game_type = 'maze'
+                if len(args) >= 3:
+                    training_num = int(args[2])
+                    test_num = 1000
+                    if len(args) >= 4:
+                        test_num = int(args[3])
+        SnakeNN(initial_games = training_num, test_games = test_num, game_type = game_type).train()
