@@ -109,6 +109,7 @@ class SnakeNN:
         return np.array([vector[1], -vector[0]])
 
     def reflect_vector(self, vector):
+        print("Reflected the vector (turned around)")
         return np.array([-vector[0], -vector[1]])
 
     def get_angle(self, a, b):
@@ -122,17 +123,17 @@ class SnakeNN:
         network = fully_connected(network, 25, activation='relu') # 25 hidden layers, Rectified Linear Unit [f(x) = max(0, x)]
         network = fully_connected(network, 1, activation='linear')
         network = regression(network, optimizer='adam', learning_rate=self.lr, loss='mean_square', name='target')
-        model = tflearn.DNN(network, tensorboard_dir='log')
-        return model
-
-    def train_model(self, training_data, model):
-        X = np.array([i[0] for i in training_data]).reshape(-1, 5, 1) # Reshape the array so that it is not continuous array anymore, but an array of lists of size 5
-        y = np.array([i[1] for i in training_data]).reshape(-1, 1)
+        model = tflearn.DNN(network, tensorboard_dir='log', tensorboard_verbose=3)
         if os.path.isfile(self.filename + ".meta") and os.path.isfile(self.filename + ".index"):
             print("Model file was found")
             model.load(self.filename)
         else:
             print("There was an issue reading the model file, new one will be created")
+        return model
+
+    def train_model(self, training_data, model):
+        X = np.array([i[0] for i in training_data]).reshape(-1, 5, 1) # Reshape the array so that it is not continuous array anymore, but an array of lists of size 5
+        y = np.array([i[1] for i in training_data]).reshape(-1, 1)
         model.fit(X,y, n_epoch = 3, shuffle = True, run_id = self.filename)
         model.save(self.filename)
         return model

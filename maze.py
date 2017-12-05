@@ -86,15 +86,19 @@ class MazeGame:
                 cell_sets.append(set_a.union(set_b))
                 walls.remove(wall)
         maze = [[1 for _ in range(width)] for _ in range(height)]
+
+        # Indices are all off by one because the board starts with 1 (0 is the border) and the array begins with 0
         maze[self.player[0][0] - 1][self.player[0][1] - 1] = 0
         # Open up the maze for the player
         maze[self.player[0][0] - 2][self.player[0][1] - 1] = 0
         maze[self.player[0][0] - 2][self.player[0][1]] = 0
+        maze[self.player[0][0] - 1][self.player[0][1]] = 0
 
         maze[self.exit[0] - 1][self.exit[1] - 1] = 0
         # Open up the exit
         maze[self.exit[0]][self.exit[1] - 1] = 0
         maze[self.exit[0]][self.exit[1] - 2] = 0
+        maze[self.exit[0] - 1][self.exit[1] - 2] = 0
         
         for i in walls:
             maze[i[1]][i[0]] = 0
