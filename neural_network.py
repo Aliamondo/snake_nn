@@ -6,6 +6,7 @@ import tflearn
 import math
 import sys
 import os
+import pickle
 from tflearn.layers.core import input_data, fully_connected
 from tflearn.layers.estimator import regression
 from statistics import mean
@@ -180,6 +181,10 @@ class SnakeNN:
         #print(Counter(steps_arr))
         print('Average score:',mean(scores_arr))
         #print(Counter(scores_arr))
+        with open('steps_arr', 'wb') as file:
+            pickle.dump(steps_arr, file)
+        with open('scores_arr', 'wb') as file:
+            pickle.dump(scores_arr, file)
 
     def visualise_game(self, model, game_type):
         game = SnakeGame(gui = True)
