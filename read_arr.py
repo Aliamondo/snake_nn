@@ -2,8 +2,9 @@ import pickle
 import tflearn
 from tflearn.layers.core import input_data, fully_connected
 from tflearn.layers.estimator import regression
+from tensorflow.python.framework import ops
 
-def load_data():
+def get_stats():
     steps_arr, scores_arr = [], []
     with open('steps_arr', 'rb') as file:
         steps_arr = pickle.load(file)
@@ -11,20 +12,21 @@ def load_data():
         scores_arr = pickle.load(file)
     return steps_arr, scores_arr
 
-def load_model(filename = 'snake_nn.tflearn'):
-    network = input_data(shape=[None, 5, 1], name='input')
-    network = fully_connected(network, 25, activation='relu', name = 'hidden1')
-    #network = fully_connected(network, 100, activation='relu', name = 'hidden1')
-    #network = fully_connected(network, 100, activation='relu', name = 'hidden2')
-    network = fully_connected(network, 1, activation='linear')
-    network = regression(network, optimizer='adam', learning_rate=0.01, loss='mean_square', name='target')
+def get_data(filename = 'snake_nn.tflearn'):
+    ops.reset_default_graph()
+    input_nn = input_data(shape=[None, 5, 1], name='input')
+    hidden1 = fully_connected(input_nn, 25, activation='relu')
+    #network = fully_connected(network, 100, activation='relu')
+    #network = fully_connected(network, 100, activation='relu')
+    output = fully_connected(hidden1, 1, activation='linear')
+    network = regression(output, optimizer='adam', learning_rate=0.01, loss='mean_square', name='target')
     model = tflearn.DNN(network)
     model.load(filename)
-    return model
 
-def get_weights():
-    model = load_model()
-    nn_vars = tflearn.get_layer_variables_by_name('hidden1')
-    nn_weights = nn_vars[0]
-    nn_biases = nn_vars[1]
-    return nn_weights, nn_biases
+    #nn_vars = tflearn.get_layer_variables_by_name('hidden1')
+    nn_weights = hidden1.W
+    nn_biases = hidden1.b
+    w = model.get_weights(hidden1.W)
+    with model.session.as_default():
+        b = tflearn.variables.get_value(hidden1.b)
+    return w, b
