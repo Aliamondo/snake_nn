@@ -14,10 +14,10 @@ def load_data():
 def load_model(filename = 'snake_nn.tflearn'):
     network = input_data(shape=[None, 5, 1], name='input')
     network = fully_connected(network, 25, activation='relu', name = 'hidden1')
-    #network = fully_connected(network, 100, activation='relu')
-    #network = fully_connected(network, 100, activation='relu')
+    #network = fully_connected(network, 100, activation='relu', name = 'hidden1')
+    #network = fully_connected(network, 100, activation='relu', name = 'hidden2')
     network = fully_connected(network, 1, activation='linear')
-    network = regression(network, optimizer='adam', learning_rate=self.lr, loss='mean_square', name='target')
+    network = regression(network, optimizer='adam', learning_rate=0.01, loss='mean_square', name='target')
     model = tflearn.DNN(network)
     model.load(filename)
     return model

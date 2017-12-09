@@ -121,9 +121,9 @@ class SnakeNN:
 
     def model(self):
         network = input_data(shape=[None, 5, 1], name='input')
-        network = fully_connected(network, 25, activation='relu') # 25 hidden layers, Rectified Linear Unit [f(x) = max(0, x)]
-        #network = fully_connected(network, 100, activation='relu')
-        #network = fully_connected(network, 100, activation='relu')
+        network = fully_connected(network, 25, activation='relu', name = 'hidden1') # 25 hidden layers, Rectified Linear Unit [f(x) = max(0, x)]
+        #network = fully_connected(network, 100, activation='relu', name = 'hidden1')
+        #network = fully_connected(network, 100, activation='relu', name = 'hidden2')
         network = fully_connected(network, 1, activation='linear')
         network = regression(network, optimizer='adam', learning_rate=self.lr, loss='mean_square', name='target')
         model = tflearn.DNN(network, tensorboard_dir='log', tensorboard_verbose=3)
