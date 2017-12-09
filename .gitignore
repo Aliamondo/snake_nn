@@ -1,2 +1,3 @@
 log/
 __pycache__/
+snake_nn.tflearn/
