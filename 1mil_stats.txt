@@ -1,0 +1,48 @@
+Training samples: 5857389
+Validation samples: 0
+--
+Training Step: 91522  | total loss: 0.04696 | time: 362.135s
+| Adam | epoch: 001 | loss: 0.04696 -- iter: 5857389/5857389
+--
+Training Step: 183044  | total loss: 0.04896 | time: 378.288s
+| Adam | epoch: 002 | loss: 0.04896 -- iter: 5857389/5857389
+--
+Training Step: 274566  | total loss: 0.05068 | time: 376.790s
+| Adam | epoch: 003 | loss: 0.05068 -- iter: 5857389/5857389
+
+_______________________________________________________________
+
+Training samples: 5898629
+Validation samples: 0
+Average steps: 385.236
+Average score: 25.422
+
+--
+Training Step: 366733  | total loss: 0.04703 | time: 355.394s
+| Adam | epoch: 001 | loss: 0.04703 -- iter: 5898629/5898629
+--
+Training Step: 458900  | total loss: 0.03631 | time: 378.977s
+| Adam | epoch: 002 | loss: 0.03631 -- iter: 5898629/5898629
+--
+Training Step: 551067  | total loss: 0.04423 | time: 384.687s
+| Adam | epoch: 003 | loss: 0.04423 -- iter: 5898629/5898629
+
+_______________________________________________________________
+
+Training samples: 5888471
+Validation samples: 0
+Average steps: 459.889
+Average score: 30.519
+
+--
+Training Step: 643075  | total loss: 0.04841 | time: 362.734s
+| Adam | epoch: 001 | loss: 0.04841 -- iter: 5888471/5888471
+--
+Training Step: 735083  | total loss: 0.05219 | time: 387.038s
+| Adam | epoch: 002 | loss: 0.05219 -- iter: 5888471/5888471
+--
+Training Step: 827091  | total loss: 0.04510 | time: 387.351s
+| Adam | epoch: 003 | loss: 0.04510 -- iter: 5888471/5888471
+
+_______________________________________________________________
+
