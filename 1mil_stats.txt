@@ -46,3 +46,71 @@ Training Step: 827091  | total loss: 0.04510 | time: 387.351s
 
 _______________________________________________________________
 
+Training samples: 5860208
+Validation samples: 0
+Average steps: 334.035
+Average score: 22.211
+
+--
+Training Step: 918657  | total loss: 0.04317 | time: 370.015s
+| Adam | epoch: 001 | loss: 0.04317 -- iter: 5860208/5860208
+--
+Training Step: 1010223  | total loss: 0.04024 | time: 397.167s
+| Adam | epoch: 002 | loss: 0.04024 -- iter: 5860208/5860208
+--
+Training Step: 1101789  | total loss: 0.04408 | time: 397.797s
+| Adam | epoch: 003 | loss: 0.04408 -- iter: 5860208/5860208
+
+_______________________________________________________________
+
+Training samples: 5846630
+Validation samples: 0
+Average steps: 329.278
+Average score: 21.706
+
+--
+Training Step: 1193143  | total loss: 0.04395 | time: 376.699s
+| Adam | epoch: 001 | loss: 0.04395 -- iter: 5846630/5846630
+--
+Training Step: 1284497  | total loss: 0.04153 | time: 395.057s
+| Adam | epoch: 002 | loss: 0.04153 -- iter: 5846630/5846630
+--
+Training Step: 1375851  | total loss: 0.04550 | time: 394.931s
+| Adam | epoch: 003 | loss: 0.04550 -- iter: 5846630/5846630
+
+_______________________________________________________________
+
+Training samples: 5834727
+Validation samples: 0
+Average steps: 530.084
+Average score: 34.67
+
+--
+Training Step: 1467019  | total loss: 0.03907 | time: 349.475s
+| Adam | epoch: 001 | loss: 0.03907 -- iter: 5834727/5834727
+--
+Training Step: 1558187  | total loss: 0.04125 | time: 374.793s
+| Adam | epoch: 002 | loss: 0.04125 -- iter: 5834727/5834727
+--
+Training Step: 1649355  | total loss: 0.05463 | time: 382.431s
+| Adam | epoch: 003 | loss: 0.05463 -- iter: 5834727/5834727
+
+_______________________________________________________________
+
+Training samples: 5865674
+Validation samples: 0
+Average steps: 530.796
+Average score: 34.658
+
+--
+Training Step: 1741007  | total loss: 0.04112 | time: 360.990s
+| Adam | epoch: 001 | loss: 0.04112 -- iter: 5865674/5865674
+--
+Training Step: 1832659  | total loss: 0.05644 | time: 383.570s
+| Adam | epoch: 002 | loss: 0.05644 -- iter: 5865674/5865674
+--
+Training Step: 1924311  | total loss: 0.03698 | time: 385.998s
+| Adam | epoch: 003 | loss: 0.03698 -- iter: 5865674/5865674
+
+_______________________________________________________________
+
