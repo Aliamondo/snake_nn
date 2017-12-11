@@ -232,6 +232,15 @@ if __name__ == "__main__":
             SnakeNN().visualise('maze')
         else:
             SnakeNN().visualise('snake')
+    elif args[0] == '-test':
+        game_type = 'snake'
+        test_num = 1000
+        if len(args) >= 2:
+            if args[1] == 'maze':
+                game_type = 'maze'
+            if len(args) >= 3:
+                test_num = int(args[2])
+        SnakeNN(test_games = test_num, game_type = game_type).test()
     elif args[0] == '-train' or args[0] == '-t':
         game_type = 'snake'
         if len(args) >= 2:
