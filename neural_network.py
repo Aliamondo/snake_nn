@@ -181,6 +181,9 @@ class SnakeNN:
         #print(Counter(steps_arr))
         print('Average score:',mean(scores_arr))
         #print(Counter(scores_arr))
+        scores_arr.sort()
+        print('Lowest score:',scores_arr[0])
+        print('Highest score:',scores_arr[-1])
         with open('steps_arr', 'wb') as file:
             pickle.dump(steps_arr, file)
         with open('scores_arr', 'wb') as file:
