@@ -131,3 +131,20 @@ Training Step: 2199630  | total loss: 0.03839 | time: 385.179s
 
 _______________________________________________________________
 
+Training samples: 5869316
+Validation samples: 0
+Average steps: 350.673
+Average score: 24.475
+
+--
+Training Step: 2291339  | total loss: 0.03516 | time: 359.958s
+| Adam | epoch: 001 | loss: 0.03516 -- iter: 5869316/5869316
+--
+Training Step: 2383048  | total loss: 0.04208 | time: 383.532s
+| Adam | epoch: 002 | loss: 0.04208 -- iter: 5869316/5869316
+--
+Training Step: 2474757  | total loss: 0.04442 | time: 382.614s
+| Adam | epoch: 003 | loss: 0.04442 -- iter: 5869316/5869316
+
+_______________________________________________________________
+
