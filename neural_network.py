@@ -121,7 +121,7 @@ class SnakeNN:
 
     def model(self):
         network = input_data(shape=[None, 5, 1], name='input')
-        network = fully_connected(network, 25, activation='relu') # 25 hidden layers, Rectified Linear Unit [f(x) = max(0, x)]
+        network = fully_connected(network, 25, activation='relu') # 25 hidden neurons, Rectified Linear Unit [f(x) = max(0, x)]
         #network = fully_connected(network, 100, activation='relu')
         #network = fully_connected(network, 100, activation='relu')
         #network = fully_connected(network, 100, activation='relu')
