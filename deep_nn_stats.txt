@@ -19,3 +19,42 @@ Highest score: 63
 ________________________________________________________
 
 2 LAYERS, 18 NEURONS EACH:
+
+Training samples: 5894577
+Validation samples: 0
+--
+Training Step: 92103  | total loss: 0.03802 | time: 291.856s
+| Adam | epoch: 001 | loss: 0.03802 -- iter: 5894577/5894577
+--
+Training Step: 184206  | total loss: 0.04471 | time: 293.645s
+| Adam | epoch: 002 | loss: 0.04471 -- iter: 5894577/5894577
+--
+Training Step: 276309  | total loss: 0.04820 | time: 292.854s
+| Adam | epoch: 003 | loss: 0.04820 -- iter: 5894577/5894577
+
+Average steps: 443.625
+Average score: 30.2886
+Lowest score: 2
+Highest score: 67
+________________________________________________________
+
+3 LAYERS, 12 NEURONS EACH:
+
+Training samples: 5848481
+Validation samples: 0
+--
+Training Step: 91383  | total loss: 0.05172 | time: 314.273s
+| Adam | epoch: 001 | loss: 0.05172 -- iter: 5848481/5848481
+--
+Training Step: 182766  | total loss: 0.04207 | time: 311.905s
+| Adam | epoch: 002 | loss: 0.04207 -- iter: 5848481/5848481
+--
+Training Step: 274149  | total loss: 0.04266 | time: 310.146s
+| Adam | epoch: 003 | loss: 0.04266 -- iter: 5848481/5848481
+
+Average steps: 323.9674
+Average score: 22.5136
+Lowest score: 2
+Highest score: 67
+________________________________________________________
+
