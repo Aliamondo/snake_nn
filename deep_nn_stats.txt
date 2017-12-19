@@ -1,0 +1,21 @@
+1 LAYER, 36 NEURONS:
+
+Training samples: 5852288
+Validation samples: 0
+--
+Training Step: 91442  | total loss: 0.05193 | time: 268.363s
+| Adam | epoch: 001 | loss: 0.05193 -- iter: 5852288/5852288
+--
+Training Step: 182884  | total loss: 0.04144 | time: 271.423s
+| Adam | epoch: 002 | loss: 0.04144 -- iter: 5852288/5852288
+--
+Training Step: 274326  | total loss: 0.05162 | time: 270.182s
+| Adam | epoch: 003 | loss: 0.05162 -- iter: 5852288/5852288
+
+Average steps: 373.4804
+Average score: 25.812
+Lowest score: 4
+Highest score: 63
+________________________________________________________
+
+2 LAYERS, 18 NEURONS EACH:
