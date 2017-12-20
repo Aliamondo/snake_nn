@@ -140,3 +140,23 @@ ________________________________________________________
 
 8 LAYERS, 4 NEURONS EACH, LAST 4 HAVE 5:
 
+Training samples: 5899299
+Validation samples: 0
+--
+Training Step: 92177  | total loss: 0.05957 | time: 317.488s
+| Adam | epoch: 001 | loss: 0.05957 -- iter: 5899299/5899299
+--
+Training Step: 184354  | total loss: 0.07793 | time: 335.995s
+| Adam | epoch: 002 | loss: 0.07793 -- iter: 5899299/5899299
+--
+Training Step: 276531  | total loss: 0.07407 | time: 339.232s
+| Adam | epoch: 003 | loss: 0.07407 -- iter: 5899299/5899299
+
+Average steps: 214.4024
+Average score: 15.6828
+Lowest score: 1
+Highest score: 45
+________________________________________________________
+
+9 LAYERS, 4 NEURONS EACH:
+
