@@ -9,3 +9,21 @@ __________________________________________________
 
 2 LAYERS, 100 NEURONS/LAYER, PRE-TRAINED:
 
+Average steps: 23.8275
+Average score: -2.4371
+Lowest score: -56
+Highest score: 1
+Total solved mazes: 728
+__________________________________________________
+
+3 LAYERS, 100 NEURONS/LAYER, PRE-TRAINED:
+
+Average steps: 19.1742
+Average score: -2.66
+Lowest score: -48
+Highest score: 1
+Total solved mazes: 191
+__________________________________________________
+
+2 LAYERS, 18 NEURONS/LAYER, PRE-TRAINED:
+
