@@ -32,7 +32,9 @@ class SnakeNN:
 
     def initial_population(self):
         training_data = []
-        for _ in range(self.initial_games):
+        print()
+        for i in range(self.initial_games):
+            progress(i + 1, self.initial_games)
             game = SnakeGame()
             if self.game_type == 'maze':
                 game = MazeGame()
@@ -229,6 +231,16 @@ class SnakeNN:
         nn_model = self.model()
         nn_model.load(self.filename)
         self.test_model(nn_model)
+
+    def progress(count, total, suffix=''):
+        bar_len = 60
+        filled_len = int(round(bar_len * count / float(total)))
+
+        percents = round(100.0 * count / float(total), 1)
+        bar = '=' * filled_len + '-' * (bar_len - filled_len)
+
+        sys.stdout.write('[%s] %s%s ...%s\r' % (bar, percents, '%', suffix))
+        sys.stdout.flush()
 
 if __name__ == "__main__":
     args = sys.argv[1:]
