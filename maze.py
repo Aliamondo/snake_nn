@@ -141,7 +141,8 @@ class MazeGame:
         else:
             self.done = True # Stop the game to avoid the infinite loop
         if self.exit_reached():
-            print("Game won!")
+            #print("Game won!")
+            self.score = 1
             self.done = True
         self.check_collisions()
         if self.gui: self.render()
