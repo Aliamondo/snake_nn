@@ -127,9 +127,9 @@ class SnakeNN:
         #network = fully_connected(network, 100, activation='relu')
         network = fully_connected(network, 1, activation='linear')
         network = regression(network, optimizer='adam', learning_rate=self.lr, loss='mean_square', name='target')
-        #model = tflearn.DNN(network, tensorboard_dir='log' + str(self.initial_games) + "/", tensorboard_verbose=3)
+        model = tflearn.DNN(network, tensorboard_dir='log' + str(self.initial_games) + "/", tensorboard_verbose=3)
         # To run tensorboard: python3 /home/andrey/.local/lib/python3.6/site-packages/tensorboard/main.py --logdir=log1000/
-        model = tflearn.DNN(network)
+        #model = tflearn.DNN(network)
         if os.path.isfile(self.filename + ".meta") and os.path.isfile(self.filename + ".index"):
             print("Model file was found")
             model.load(self.filename)
@@ -148,6 +148,7 @@ class SnakeNN:
         steps_arr = []
         scores_arr = []
         count = 0
+        solved = 0
         for _ in range(self.test_games):
             steps = 0
             game_memory = []
@@ -165,6 +166,7 @@ class SnakeNN:
                 done, score, snake, food  = game.step(game_action)
                 game_memory.append([prev_observation, action])
                 if done:
+                    if self.game_type == 'maze' and score == 1: solved += 1
                     count += 1
                     if count % 100 == 0:
                         print('-----')
@@ -187,6 +189,7 @@ class SnakeNN:
         scores_arr.sort()
         print('Lowest score:',scores_arr[0])
         print('Highest score:',scores_arr[-1])
+        if self.game_type == 'maze': print('Total solved mazes:',solved)
         with open('steps_arr', 'wb') as file:
             pickle.dump(steps_arr, file)
         with open('scores_arr', 'wb') as file:

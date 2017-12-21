@@ -27,3 +27,12 @@ __________________________________________________
 
 2 LAYERS, 18 NEURONS/LAYER, PRE-TRAINED:
 
+Average steps: 24.7383
+Average score: -5.4166
+Lowest score: -64
+Highest score: 1
+Total solved mazes: 583
+__________________________________________________
+
+1 LAYER, 25 NEURONS, NEW:
+
