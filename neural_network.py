@@ -127,7 +127,9 @@ class SnakeNN:
         #network = fully_connected(network, 100, activation='relu')
         network = fully_connected(network, 1, activation='linear')
         network = regression(network, optimizer='adam', learning_rate=self.lr, loss='mean_square', name='target')
-        model = tflearn.DNN(network, tensorboard_dir='log' + str(self.initial_games) + "/", tensorboard_verbose=3)
+        #model = tflearn.DNN(network, tensorboard_dir='log' + str(self.initial_games) + "/", tensorboard_verbose=3)
+        # To run tensorboard: python3 /home/andrey/.local/lib/python3.6/site-packages/tensorboard/main.py --logdir=log1000/
+        model = tflearn.DNN(network)
         if os.path.isfile(self.filename + ".meta") and os.path.isfile(self.filename + ".index"):
             print("Model file was found")
             model.load(self.filename)
