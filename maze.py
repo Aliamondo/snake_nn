@@ -11,9 +11,40 @@ class MazeGame:
         self.manual = False
         self.move_history = ddict(int)
 
+    def solvable(self):
+        self.was_here = [[False for _ in range(self.board["height"])] for _ in range(self.board["width"])]
+        self.correct_path = self.was_here.copy()
+        self.recursive_solve(self.player[0][0] - 1, self.player[0][1] - 1)
+        return self.correct_path[self.exit[0] - 1][self.exit[1] - 1] == 1
+
+    def recursive_solve(self, x, y):
+        if [x, y] == self.exit: return True
+        if self.maze[x][y] == 1 or self.was_here[x][y]: return False
+        self.was_here[x][y] = True
+        if x != 0:
+            if self.recursive_solve(x - 1, y):
+                self.correct_path[x][y] = True
+                return True
+        if x != self.board["height"] - 1:
+            if self.recursive_solve(x + 1, y):
+                self.correct_path[x][y] = True
+                return True
+        if y != 0:
+            if self.recursive_solve(x, y - 1):
+                self.correct_path[x][y] = True
+                return True
+        if y != self.board["width"] - 1:
+            if self.recursive_solve(x, y + 1):
+                self.correct_path[x][y] = True
+                return True
+        return False
+
     def start(self):
         self.game_init()
         self.generate_obstacles()
+        while not self.solvable():
+            self.game_init()
+            self.generate_obstacles()
         if self.gui: self.render_init()
         return self.generate_observations()
 
@@ -102,6 +133,7 @@ class MazeGame:
         
         for i in walls:
             maze[i[1]][i[0]] = 0
+        self.maze = maze
         for i in range(len(maze)):
             for j in range(len(maze[i])):
                 if maze[i][j] == 1:
