@@ -32,9 +32,9 @@ class SnakeNN:
 
     def initial_population(self):
         training_data = []
-        print()
+        print("Generating initial games")
         for i in range(self.initial_games):
-            progress(i + 1, self.initial_games)
+            self.progress(i + 1, self.initial_games)
             game = SnakeGame()
             if self.game_type == 'maze':
                 game = MazeGame()
@@ -151,7 +151,8 @@ class SnakeNN:
         scores_arr = []
         count = 0
         solved = 0
-        for _ in range(self.test_games):
+        print("Testing in progress")
+        for i in range(self.test_games):
             steps = 0
             game_memory = []
             game = SnakeGame()
@@ -168,9 +169,11 @@ class SnakeNN:
                 done, score, snake, food  = game.step(game_action)
                 game_memory.append([prev_observation, action])
                 if done:
+                    self.progress(i + 1, self.test_games)
                     if self.game_type == 'maze' and score == 1: solved += 1
                     count += 1
-                    if count % 100 == 0:
+                    if False:
+                    #if count % 100 == 0:
                         print('-----')
                         print('id: ' + str(count))
                         print(steps)
@@ -232,7 +235,7 @@ class SnakeNN:
         nn_model.load(self.filename)
         self.test_model(nn_model)
 
-    def progress(count, total, suffix=''):
+    def progress(self, count, total, suffix=''):
         bar_len = 60
         filled_len = int(round(bar_len * count / float(total)))
 
