@@ -36,20 +36,20 @@ __________________________________________________
 
 1 LAYER, 25 NEURONS, NEW:
 
-Average steps: 24.3612
-Average score: -0.7171
-Lowest score: -56
+Average steps: 24.4609
+Average score: -0.7736
+Lowest score: -80
 Highest score: 1
-Total solved mazes: 3139
+Total solved mazes: 3149
 __________________________________________________
 
 2 LAYERS, 100 NEURONS/LAYER, NEW:
 
-Average steps: 26.5635
-Average score: -1.0763
-Lowest score: -64
+Average steps: 26.5157
+Average score: -1.0292
+Lowest score: -80
 Highest score: 1
-Total solved mazes: 3097
+Total solved mazes: 3161
 __________________________________________________
 
 3 LAYERS, 100 NEURONS/LAYER, NEW:
