@@ -53,3 +53,9 @@ Total solved mazes: 3712
 __________________________________________________
 
 3 LAYERS, 100 NEURONS/LAYER, NEW:
+
+Average steps: 24.2054
+Average score: -1.1337
+Lowest score: -40
+Highest score: 1
+Total solved mazes: 3108
