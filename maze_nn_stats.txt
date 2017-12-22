@@ -1,61 +1,45 @@
 1 LAYER, 25 NEURONS, PRE-TRAINED:
 
-Average steps: 23.5341
-Average score: -2.4395
-Lowest score: -72
+Average steps: 24.9078
+Average score: -2.4205
+Lowest score: -56
 Highest score: 1
-Total solved mazes: 764
+Total solved mazes: 932
 __________________________________________________
 
 2 LAYERS, 100 NEURONS/LAYER, PRE-TRAINED:
 
-Average steps: 23.8275
-Average score: -2.4371
-Lowest score: -56
+Average steps: 25.4965
+Average score: -2.5008
+Lowest score: -80
 Highest score: 1
-Total solved mazes: 728
+Total solved mazes: 895
 __________________________________________________
 
 3 LAYERS, 100 NEURONS/LAYER, PRE-TRAINED:
 
-Average steps: 19.1742
-Average score: -2.66
-Lowest score: -48
+Average steps: 19.7023
+Average score: -2.5882
+Lowest score: -64
 Highest score: 1
-Total solved mazes: 191
+Total solved mazes: 216
 __________________________________________________
 
 2 LAYERS, 18 NEURONS/LAYER, PRE-TRAINED:
 
-Average steps: 24.7383
-Average score: -5.4166
-Lowest score: -64
+Average steps: 25.6873
+Average score: -5.486
+Lowest score: -72
 Highest score: 1
-Total solved mazes: 583
+Total solved mazes: 665
 __________________________________________________
 
 1 LAYER, 25 NEURONS, NEW:
 
-Average steps: 24.4609
-Average score: -0.7736
-Lowest score: -80
-Highest score: 1
-Total solved mazes: 3149
 __________________________________________________
 
 2 LAYERS, 100 NEURONS/LAYER, NEW:
 
-Average steps: 26.5157
-Average score: -1.0292
-Lowest score: -80
-Highest score: 1
-Total solved mazes: 3161
 __________________________________________________
 
 3 LAYERS, 100 NEURONS/LAYER, NEW:
-
-Average steps: 23.3123
-Average score: -1.4836
-Lowest score: -48
-Highest score: 1
-Total solved mazes: 2653
