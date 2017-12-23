@@ -48,6 +48,60 @@ MAZE:
 Training samples: 128329
 Validation samples: 0
 --
+Training Step: 277382  | total loss: 0.04781 | time: 6.609s
+| Adam | epoch: 001 | loss: 0.04781 -- iter: 128329/128329
+--
+Training Step: 279388  | total loss: 0.05549 | time: 6.466s
+| Adam | epoch: 002 | loss: 0.05549 -- iter: 128329/128329
+--
+Training Step: 281394  | total loss: 0.05074 | time: 6.464s
+| Adam | epoch: 003 | loss: 0.05074 -- iter: 128329/128329
+--
+
+Average steps: 29.764
+Average score: -3.2957
+Lowest score: -112
+Highest score: 1
+Total solved mazes: 1630
+
+
+SNAKE:
+Average steps: 392.6546
+Average score: 25.4322
+Lowest score: 2
+Highest score: 70
+__________________________________________________
+
+3 LAYERS, 100 NEURONS/LAYER, PRE-TRAINED:
+
+Average steps: 19.7023
+Average score: -2.5882
+Lowest score: -64
+Highest score: 1
+Total solved mazes: 216
+
+AFTER TRAINING:
+MAZE:
+
+
+SNAKE:
+
+__________________________________________________
+
+2 LAYERS, 18 NEURONS/LAYER, PRE-TRAINED:
+
+Average steps: 25.6873
+Average score: -5.486
+Lowest score: -72
+Highest score: 1
+Total solved mazes: 665
+
+AFTER TRAINING:
+MAZE:
+
+Training samples: 128329
+Validation samples: 0
+--
 Training Step: 278315  | total loss: 0.07815 | time: 5.335s
 | Adam | epoch: 001 | loss: 0.07815 -- iter: 128329/128329
 --
@@ -66,25 +120,10 @@ Total solved mazes: 3708
 
 
 SNAKE:
-
-__________________________________________________
-
-3 LAYERS, 100 NEURONS/LAYER, PRE-TRAINED:
-
-Average steps: 19.7023
-Average score: -2.5882
-Lowest score: -64
-Highest score: 1
-Total solved mazes: 216
-__________________________________________________
-
-2 LAYERS, 18 NEURONS/LAYER, PRE-TRAINED:
-
-Average steps: 25.6873
-Average score: -5.486
-Lowest score: -72
-Highest score: 1
-Total solved mazes: 665
+Average steps: 336.5262
+Average score: 20.0078
+Lowest score: 1
+Highest score: 61
 __________________________________________________
 
 1 LAYER, 25 NEURONS, NEW:
