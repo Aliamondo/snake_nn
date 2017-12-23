@@ -82,9 +82,27 @@ Total solved mazes: 216
 
 AFTER TRAINING:
 MAZE:
+--
+Training Step: 277697  | total loss: 0.03795 | time: 8.486s
+| Adam | epoch: 001 | loss: 0.03795 -- iter: 128329/128329
+--
+Training Step: 279703  | total loss: 0.02555 | time: 8.339s
+| Adam | epoch: 002 | loss: 0.02555 -- iter: 128329/128329
+--
+Training Step: 281709  | total loss: 0.03310 | time: 7.889s
+| Adam | epoch: 003 | loss: 0.03310 -- iter: 128329/128329
 
+Average steps: 29.1093
+Average score: -1.6641
+Lowest score: -40
+Highest score: 1
+Total solved mazes: 3080
 
 SNAKE:
+Average steps: 378.2268
+Average score: 19.7258
+Lowest score: 1
+Highest score: 65
 
 __________________________________________________
 
