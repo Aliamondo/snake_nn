@@ -55,6 +55,8 @@ class SnakeNN:
                         training_data.append([self.add_action_to_observation(prev_observation, action), 0]) # The last move was not efficient
                     prev_observation = self.generate_observation(snake, food)
                     prev_food_distance = food_distance
+        with open('init_pop_gen', 'wb') as file:
+            pickle.dump(training_data, file)
         return training_data
 
     def generate_action(self, snake):
@@ -220,7 +222,11 @@ class SnakeNN:
                 prev_observation = self.generate_observation(snake, food)
 
     def train(self):
-        training_data = self.initial_population()
+        training_data = []
+        with open('init_pop_gen', 'rb') as file:
+            training_data = pickle.load(file)
+        except Exception:
+            training_data = self.initial_population()
         nn_model = self.model()
         nn_model = self.train_model(training_data, nn_model)
         self.test_model(nn_model)
