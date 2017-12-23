@@ -5,6 +5,33 @@ Average score: -2.4205
 Lowest score: -56
 Highest score: 1
 Total solved mazes: 932
+
+AFTER EXTRA TRAINING:
+MAZE:
+
+Training samples: 128329
+Validation samples: 0
+--
+Training Step: 276572  | total loss: 0.07100 | time: 6.662s
+| Adam | epoch: 001 | loss: 0.07100 -- iter: 128329/128329
+--
+Training Step: 278578  | total loss: 0.06407 | time: 6.610s
+| Adam | epoch: 002 | loss: 0.06407 -- iter: 128329/128329
+--
+Training Step: 280584  | total loss: 0.07068 | time: 7.118s
+| Adam | epoch: 003 | loss: 0.07068 -- iter: 128329/128329
+--
+
+Average steps: 25.9561
+Average score: -1.0057
+Lowest score: -88
+Highest score: 1
+Total solved mazes: 1824
+
+
+SNAKE:
+
+Gets stuck around an apple
 __________________________________________________
 
 2 LAYERS, 100 NEURONS/LAYER, PRE-TRAINED:
@@ -14,6 +41,32 @@ Average score: -2.5008
 Lowest score: -80
 Highest score: 1
 Total solved mazes: 895
+
+AFTER TRAINING:
+MAZE:
+
+Training samples: 128329
+Validation samples: 0
+--
+Training Step: 278315  | total loss: 0.07815 | time: 5.335s
+| Adam | epoch: 001 | loss: 0.07815 -- iter: 128329/128329
+--
+Training Step: 280321  | total loss: 0.09461 | time: 5.177s
+| Adam | epoch: 002 | loss: 0.09461 -- iter: 128329/128329
+--
+Training Step: 282327  | total loss: 0.08741 | time: 5.236s
+| Adam | epoch: 003 | loss: 0.08741 -- iter: 128329/128329
+--
+
+Average steps: 30.168
+Average score: -1.3074
+Lowest score: -40
+Highest score: 1
+Total solved mazes: 3708
+
+
+SNAKE:
+
 __________________________________________________
 
 3 LAYERS, 100 NEURONS/LAYER, PRE-TRAINED:

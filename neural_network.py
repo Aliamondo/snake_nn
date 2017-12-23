@@ -125,15 +125,17 @@ class SnakeNN:
 
     def model(self):
         network = input_data(shape=[None, 5, 1], name='input')
-        network = fully_connected(network, 25, activation='relu') # 25 hidden neurons, Rectified Linear Unit [f(x) = max(0, x)]
+        #network = fully_connected(network, 25, activation='relu') # 25 hidden neurons, Rectified Linear Unit [f(x) = max(0, x)]
+        network = fully_connected(network, 18, activation='relu')
+        network = fully_connected(network, 18, activation='relu')
         #network = fully_connected(network, 100, activation='relu')
         #network = fully_connected(network, 100, activation='relu')
         #network = fully_connected(network, 100, activation='relu')
         network = fully_connected(network, 1, activation='linear')
         network = regression(network, optimizer='adam', learning_rate=self.lr, loss='mean_square', name='target')
-        model = tflearn.DNN(network, tensorboard_dir='log' + str(self.initial_games) + "/", tensorboard_verbose=3)
+        #model = tflearn.DNN(network, tensorboard_dir='log' + str(self.initial_games) + "/", tensorboard_verbose=3)
         # To run tensorboard: python3 /home/andrey/.local/lib/python3.6/site-packages/tensorboard/main.py --logdir=log1000/
-        #model = tflearn.DNN(network)
+        model = tflearn.DNN(network)
         if os.path.isfile(self.filename + ".meta") and os.path.isfile(self.filename + ".index"):
             print("Model file was found")
             model.load(self.filename)
@@ -223,9 +225,12 @@ class SnakeNN:
 
     def train(self):
         training_data = []
-        with open('init_pop_gen', 'rb') as file:
-            training_data = pickle.load(file)
+        try:
+            with open('init_pop_gen', 'rb') as file:
+                print("Initial population data file found")
+                training_data = pickle.load(file)
         except Exception:
+            print("Generating a new initial population")
             training_data = self.initial_population()
         nn_model = self.model()
         nn_model = self.train_model(training_data, nn_model)
