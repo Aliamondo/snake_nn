@@ -1,3 +1,26 @@
+"""
+If the neural network needs to be loaded, the correct structure of the said network
+needs to be present in the SnakeNN.model() method.
+
+Also, the network that needs to be loaded has to be copied into the root directory
+of this project before this script's execution.
+
+[GAME TYPE] is the type of the game that needs to be loaded and can be either
+"snake" or "maze".
+
+Console arguments:
+
+Create or additionally train and then test the network:
+-t [GAME TYPE] [NUMBER OF INITIAL GAMES] [NUMBER OF TEST GAME RUNS]
+
+Visualize one single test game played by the NN:
+-v [GAME TYPE]
+
+Test the existing network without any additional training:
+-test [GAME TYPE] [NUMBER OF TEST GAME RUNS]
+
+"""
+
 from snake import SnakeGame
 from maze import MazeGame
 from random import randint
@@ -125,9 +148,9 @@ class SnakeNN:
 
     def model(self):
         network = input_data(shape=[None, 5, 1], name='input')
-        #network = fully_connected(network, 25, activation='relu') # 25 hidden neurons, Rectified Linear Unit [f(x) = max(0, x)]
-        network = fully_connected(network, 18, activation='relu')
-        network = fully_connected(network, 18, activation='relu')
+        network = fully_connected(network, 25, activation='relu') # 25 hidden neurons, Rectified Linear Unit [f(x) = max(0, x)]
+        #network = fully_connected(network, 18, activation='relu')
+        #network = fully_connected(network, 18, activation='relu')
         #network = fully_connected(network, 100, activation='relu')
         #network = fully_connected(network, 100, activation='relu')
         #network = fully_connected(network, 100, activation='relu')
